@@ -1,9 +1,9 @@
-$measurements = @(Get-content adventofcode.csv)
+[int[]]$measurements = Get-content adventofcode.csv
 $answer = 0
 
 $i = 1
 do {
-    if ([int]$measurements[$i] -gt [int]$measurements[$i-1]) { # without the int cast there will be one case that is interepret wrongly
+    if ($measurements[$i] -gt $measurements[$i-1]) {
         $answer++
     }
     $i++
