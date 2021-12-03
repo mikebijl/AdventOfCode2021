@@ -1,4 +1,11 @@
-[int[]]$measurements = Get-content adventofcode.csv
+param (
+    [Switch]$example
+)
+$day = $PSScriptRoot.Substring($PSScriptRoot.Length-1,1)
+If ($example -eq $true) {$file = "example"} else {$file = "input" }
+[int[]]$measurements = Get-content -Path "$PSScriptRoot\$($file)_$day.txt"
+
+
 $result = 0
 $subresult = @()
 $i = 0
