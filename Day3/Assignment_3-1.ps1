@@ -1,4 +1,4 @@
-$diagnostics = Get-Content input.txt
+$diagnostics = Get-Content $PSScriptRoot\input.txt
 
 $i = 0
 $gamma = ""
