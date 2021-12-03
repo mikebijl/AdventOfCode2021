@@ -1,4 +1,9 @@
-$instructions = Import-Csv input.txt -Delimiter ' ' -Header 'Direction','Distance'
+param (
+    [Switch]$example
+)
+$day = $PSScriptRoot.Substring($PSScriptRoot.Length-1,1)
+If ($example -eq $true) {$file = "example"} else {$file = "input" }
+$instructions = Import-Csv -Path "$PSScriptRoot\$($file)_$day.txt" -Delimiter ' ' -Header 'Direction','Distance'
 
 $verticalDistance = 0
 $horizontalDistance = 0
