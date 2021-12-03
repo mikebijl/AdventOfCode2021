@@ -1,4 +1,9 @@
-$diagnostics = Get-Content $PSScriptRoot\input.txt
+param (
+    [Switch]$example
+)
+$day = $PSScriptRoot.Substring($PSScriptRoot.Length-1,1)
+If ($example -eq $true) {$file = "example"} else {$file = "input" }
+$diagnostics = Get-Content "$PSScriptRoot\$($file)_$day.txt"
 
 $i = 0
 $gamma = ""
@@ -13,23 +18,12 @@ do {
     }
 
     $i++
-} while ( $i -lt 12)
-$gamma
-
-$epsilon = ""
-$i = 0
-
-do {
-    If ($gamma[$i] -eq "1") {
-        $epsilon += "0"
-    } else {
-        $epsilon += "1"
-    }
-    $i++
-} while ($i -lt $gamma.Length)
+} while ( $i -lt $diagnostics[0].Length)
 
 $gammaInt = $([convert]::ToInt32($gamma,2))
+$epsilon = [convert]::ToString($(-bnot $gammaInt),2) | ForEach-Object {$_.Substring($($_.Length - $gamma.Length ),($gamma.Length))}
 $epsilonInt = $([convert]::ToInt32($epsilon,2))
+
 Write-host "Binary string gamma:`t" -NoNewline -ForegroundColor Cyan
 Write-host $gamma -ForegroundColor Magenta
 Write-host "Integer string gamma:`t" -NoNewline -ForegroundColor Cyan
